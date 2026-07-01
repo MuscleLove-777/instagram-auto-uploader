@@ -1,0 +1,84 @@
+name: Instagram Auto Post
+
+on:
+  schedule:
+    - cron: '0 3 * * *'    # JST 12:00
+    - cron: '0 11 * * *'   # JST 20:00
+    - cron: '0 0 1 * *'    # 毎月1日 UTC 0:00 → トークン点検
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    # トークン点検専用の月次cronでは投稿しない
+    if: github.event.schedule != '0 0 1 * *'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post (attempt 1)
+        id: a1
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GDRIVE_FOLDER_ID_INSTAGRAM: ${{ secrets.GDRIVE_FOLDER_ID_INSTAGRAM }}
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python upload.py
+
+      - name: Wait before retry
+        if: steps.a1.outcome == 'failure'
+        run: echo "Attempt 1 failed. Waiting 90s..." && sleep 90
+
+      - name: Post (attempt 2)
+        id: a2
+        if: steps.a1.outcome == 'failure'
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GDRIVE_FOLDER_ID_INSTAGRAM: ${{ secrets.GDRIVE_FOLDER_ID_INSTAGRAM }}
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python upload.py
+
+      - name: Save upload log
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add uploaded_instagram.json || true
+          git diff --cached --quiet || git commit -m "Update Instagram upload log [skip ci]"
+          git push || true
+
+  refresh-token:
+    # 月次cronか手動実行のときだけトークンを点検・延長
+    if: github.event.schedule == '0 0 1 * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check and refresh token
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python token_refresh.py

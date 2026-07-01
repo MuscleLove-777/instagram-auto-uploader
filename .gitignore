@@ -1,0 +1,6 @@
+media/
+images/
+__pycache__/
+*.pyc
+.env
+*_ig.jpg
