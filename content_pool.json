@@ -1,0 +1,300 @@
+{
+  "generated_at": "2026-07-02 08:00:05 +0900",
+  "version": "20260702",
+  "goal_note": "2026年 月商目標 300,000円 / 進捗 0.0% / 国是: 2031年 年商1億円",
+  "rules": {
+    "generic_trend_max": 1,
+    "hashlike_ban": true,
+    "lanes_must_not_mix": true,
+    "note": "uploaderは自レーンのみ読む。generic_trend_candidatesから使うのは最大1個。",
+    "utm_guide": "発リンクには utm_source=<媒体名>&utm_medium=autopost を必ず付与する。pool_loader.as_insights(lane, platform=媒体名) がCTA内URLへ自動付与する。投稿にはハブor自ブログへの計測可能リンクを最低1本入れる。"
+  },
+  "ng_words_global": [
+    "アツロウ",
+    "あつろう",
+    "atsuro",
+    "atsurou",
+    "アツロー",
+    "GOOGLE_API_KEY"
+  ],
+  "generic_trend_candidates": [
+    "ゲーム",
+    "ディスク",
+    "PayPay"
+  ],
+  "lanes": {
+    "safe_fitness": {
+      "platforms": [
+        "facebook",
+        "instagram",
+        "tiktok",
+        "youtube",
+        "pinterest",
+        "threads",
+        "ameblo",
+        "rakuten",
+        "fc2",
+        "hatena",
+        "livedoor",
+        "mixi"
+      ],
+      "base_tags": [
+        "筋トレ女子",
+        "筋肉女子",
+        "フィットネス",
+        "ワークアウト",
+        "ボディメイク",
+        "musclegirl",
+        "fitnessmotivation",
+        "gymgirl",
+        "strongwomen",
+        "workoutmotivation",
+        "fitfam",
+        "calisthenics",
+        "AIイラスト",
+        "AIアート"
+      ],
+      "trend_tags": [
+        "AI"
+      ],
+      "ng_words": [
+        "uncensored",
+        "sexy",
+        "nude",
+        "porn",
+        "fetish",
+        "adult",
+        "nsfw",
+        "18禁",
+        "エロ",
+        "アダルト",
+        "無修正",
+        "裸"
+      ],
+      "caption_templates": [
+        "見てくれ、この圧。{tags}",
+        "今日の一枚、強い。{tags}",
+        "これは仕上がりエグい。{tags}",
+        "筋肉女子、やっぱ最高。{tags}",
+        "バキバキ。でも美しい。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "継続は力なり。今日も積み上げ💪 {tags}",
+        "Strong is beautiful💪 {tags}",
+        "フォームも仕上がりも教科書級💪 {tags}",
+        "この背中、何年分の努力なんだ🔥 {tags}",
+        "モチベ落ちた日はこれ見て復活💪 {tags}"
+      ],
+      "cta_lines": [
+        "もっと見たい人はXへ → https://x.com/MuscleGirlLove7",
+        "まとめハブはこちら → https://musclelove-777.github.io/",
+        "フォローで毎日筋肉美が届く💪"
+      ],
+      "priority_urls": [
+        "https://musclelove-777.github.io/",
+        "https://x.com/MuscleGirlLove7"
+      ],
+      "affiliate_cards": []
+    },
+    "mature_muscle": {
+      "platforms": [
+        "x",
+        "tumblr",
+        "misskey",
+        "deviantart",
+        "pixiv"
+      ],
+      "base_tags": [
+        "筋肉美",
+        "musclebeauty",
+        "femalemuscle",
+        "muscularwoman",
+        "fbb",
+        "筋肉美女",
+        "muscle",
+        "physique",
+        "flex",
+        "AIイラスト"
+      ],
+      "trend_tags": [
+        "AI"
+      ],
+      "ng_words": [
+        "porn",
+        "無修正",
+        "uncensored"
+      ],
+      "caption_templates": [
+        "見てくれ、この圧。{tags}",
+        "今日の一枚、強い。{tags}",
+        "これは仕上がりエグい。{tags}",
+        "筋肉女子、やっぱ最高。{tags}",
+        "バキバキ。でも美しい。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "継続は力なり。今日も積み上げ💪 {tags}",
+        "Strong is beautiful💪 {tags}",
+        "しょーがないなぁ、特別に見せてあげる。{tags}",
+        "え、これ合法なの？レベル。{tags}",
+        "未公開はもっとすごい。{tags}"
+      ],
+      "cta_lines": [
+        "未公開・高解像度はPatreonで → https://www.patreon.com/MuscleGirlLove",
+        "X @MuscleGirlLove7 でほぼ毎日更新 → https://x.com/MuscleGirlLove7"
+      ],
+      "priority_urls": [
+        "https://www.patreon.com/MuscleGirlLove",
+        "https://x.com/MuscleGirlLove7",
+        "https://musclelove-777.github.io/"
+      ],
+      "affiliate_cards": []
+    },
+    "adult_fanza": {
+      "platforms": [
+        "pawoo",
+        "boards",
+        "booru",
+        "endchan"
+      ],
+      "base_tags": [
+        "筋肉美女",
+        "マッスル",
+        "アスリート系",
+        "腹筋女子",
+        "FANZA",
+        "AI美女"
+      ],
+      "trend_tags": [
+        "AI"
+      ],
+      "ng_words": [],
+      "caption_templates": [
+        "見てくれ、この圧。{tags}",
+        "今日の一枚、強い。{tags}",
+        "これは仕上がりエグい。{tags}",
+        "筋肉女子、やっぱ最高。{tags}",
+        "バキバキ。でも美しい。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "継続は力なり。今日も積み上げ💪 {tags}",
+        "Strong is beautiful💪 {tags}",
+        "全作品まとめはeronaviで。{tags}",
+        "今日の推し筋肉、保存推奨。{tags}"
+      ],
+      "cta_lines": [
+        "未公開はPatreon → https://www.patreon.com/MuscleGirlLove",
+        "作品ガイド・ランキングはeronaviで検索"
+      ],
+      "priority_urls": [
+        "https://www.patreon.com/MuscleGirlLove",
+        "https://musclelove-777.github.io/"
+      ],
+      "affiliate_cards": []
+    }
+  },
+  "performance": {
+    "as_of": "2026-06-30",
+    "winners": [
+      "facebook",
+      "x"
+    ],
+    "dead_platforms": [
+      "ameblo",
+      "deviantart",
+      "fc2",
+      "hatena",
+      "instagram",
+      "livedoor",
+      "mixi",
+      "pawoo",
+      "pinterest",
+      "pixiv",
+      "rakuten",
+      "threads",
+      "tumblr"
+    ],
+    "platform_sessions_28d": {
+      "facebook": 2,
+      "x": 1,
+      "youtube": 0,
+      "tumblr": 0,
+      "pinterest": 0,
+      "instagram": 0,
+      "threads": 0,
+      "ameblo": 0,
+      "rakuten": 0,
+      "fc2": 0,
+      "hatena": 0,
+      "livedoor": 0,
+      "mixi": 0,
+      "pixiv": 0,
+      "deviantart": 0,
+      "pawoo": 0
+    },
+    "lane_sessions_28d": {
+      "safe_fitness": 2,
+      "mature_muscle": 1,
+      "adult_fanza": 0
+    },
+    "organic_sessions_28d": 12,
+    "fanza_clicks_28d": 0,
+    "note": "uploaderは勝ち媒体(先頭)ほど投稿頻度・品質を上げる。deadは導線リンクと投稿実績を点検。"
+  },
+  "intel": {
+    "top_pages": [
+      {
+        "property": "blog",
+        "page_path": "/",
+        "page_views_28d": 3828
+      },
+      {
+        "property": "adult",
+        "page_path": "/",
+        "page_views_28d": 71
+      },
+      {
+        "property": "blog",
+        "page_path": "/ranking/index.html",
+        "page_views_28d": 39
+      },
+      {
+        "property": "blog",
+        "page_path": "/articles/2026-04-04-arm-wrestling-technique-guide.html",
+        "page_views_28d": 27
+      },
+      {
+        "property": "blog",
+        "page_path": "/articles/2026-04-04-izawa-queen.html",
+        "page_views_28d": 25
+      },
+      {
+        "property": "blog",
+        "page_path": "/tools/builder.html",
+        "page_views_28d": 21
+      },
+      {
+        "property": "blog",
+        "page_path": "/tools/diagnosis.html",
+        "page_views_28d": 20
+      },
+      {
+        "property": "blog",
+        "page_path": "/articles/2026-04-04-deep-jewels-rising.html",
+        "page_views_28d": 19
+      }
+    ],
+    "top_queries": [
+      {
+        "query": "エロナビ",
+        "clicks": 0,
+        "impressions": 10
+      }
+    ],
+    "improvement_queue": [
+      "月商見込 0円 / 目標 300,000円 (0.0%)。CTA導線・投稿頻度・高PVページからのPatreon/FANZA誘導を強化する",
+      "FANZAクリックが28日間ゼロ。計測タグとクリック導線を点検する",
+      "流入ゼロの投稿媒体: ameblo, deviantart, fc2, hatena, instagram, livedoor, mixi, pawoo, pinterest, pixiv, rakuten, threads, tumblr。リンク有無と投稿実績を点検、駄目なら頻度を勝ち媒体へ再配分",
+      "勝ち媒体 facebook: 2セッション/28日。投稿頻度・タグ量を増やして増幅する",
+      "勝ち媒体 x: 1セッション/28日。投稿頻度・タグ量を増やして増幅する",
+      "FANZAクリック28日ゼロ。流入自体が無いのが主因。記事面のCTA改善より流入創出を優先する"
+    ],
+    "kpi_warnings": []
+  }
+}
