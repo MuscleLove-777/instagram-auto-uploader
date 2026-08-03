@@ -42,7 +42,7 @@ GRAPH = "https://graph.facebook.com/v21.0"
 
 sys.path.insert(0, HERE)
 from pool_loader import as_insights          # noqa: E402
-from media_host import upload_to_public_url  # noqa: E402
+from media_host import upload_to_public_url, cleanup_public_url  # noqa: E402
 
 
 def _load_dotenv(path=None):
@@ -103,7 +103,30 @@ def load_approved_entries():
     return out
 
 
-def pick_video():
+def _cat(m):
+    """カテゴリ名。未設定なら置き場のフォルダ名で代用（履歴と候補で表記を揃える）。"""
+    path = m.get("path") or m.get("abspath") or ""
+    return (m.get("category") or os.path.basename(os.path.dirname(path)) or "")
+
+
+def _balanced_choice(cands, posted, lookback=4):
+    """直近に出したカテゴリほど選ばれにくくする。
+    一様ランダムだと「懸垂」が偏って続くため（実績: 直近4本中3本が懸垂）。"""
+    recent = [_cat(e) for e in posted.get("files", [])[-lookback:]]
+    groups = {}
+    for m in cands:
+        groups.setdefault(_cat(m), []).append(m)
+    if len(groups) < 2:
+        return random.choice(cands)
+    cats = list(groups)
+    weights = [0.25 ** recent.count(c) for c in cats]      # 直近1回ごとに1/4
+    cat = random.choices(cats, weights=weights)[0]
+    print(f"  カテゴリ配分: 直近{recent} → {cat or '(なし)'}")
+    return random.choice(groups[cat])
+
+
+def pick_video(exclude=None):
+    exclude = {_norm(p) for p in (exclude or [])}
     metas = load_approved_entries()
     if not metas:
         print(f"承認プールが空です（{APPROVED_LOG}）→ 投稿スキップ")
@@ -123,6 +146,8 @@ def pick_video():
         if not os.path.exists(m["path"]):
             continue
         n = _norm(m["path"])
+        if n in exclude:            # 同一実行内で失敗済み → 別素材で再挑戦
+            continue
         if n not in last_at:
             fresh.append(m)
             continue
@@ -133,7 +158,7 @@ def pick_video():
         except Exception:
             pass
     if fresh:
-        chosen = random.choice(fresh)
+        chosen = _balanced_choice(fresh, posted)
         print(f"選択(未投稿 {len(fresh)}/{len(metas)}): {os.path.basename(chosen['path'])}")
         return chosen
     if reusable:
@@ -159,11 +184,29 @@ def build_caption(video_path):
     tags_all = [t for t in (ins.get("recommended_tags") or []) if t and " " not in t]
     ng = [w.lower() for w in (ins.get("avoid_tags") or [])]
 
-    tpl = random.choice(templates)
+    # 直近の投稿と同じ文面・同じタグ並びを避ける（同じ煽り文が3回出ていたため）
+    recent = [str(e.get("caption", "")) for e in load_posted().get("files", [])[-5:]]
+    used_bodies = {r.split("\n")[0].strip() for r in recent}
+    unused = [t for t in templates
+              if t.replace("{hashtags}", "").strip() not in used_bodies]
+    tpl = random.choice(unused or templates)
+
+    prev_tags = set()
+    for r in recent[-2:]:
+        prev_tags |= {w.lstrip("#") for w in r.split() if w.startswith("#")}
+
     category = os.path.basename(os.path.dirname(video_path)).lower()
     cat_tags = CATEGORY_TAGS.get(category, [])
+    if cat_tags and prev_tags.issuperset(cat_tags):
+        cat_tags = random.sample(cat_tags, 1)      # 連続時はカテゴリタグも間引く
     pool = [t for t in tags_all if t not in cat_tags]
-    picked = cat_tags + random.sample(pool, min(7, len(pool)))
+    fresh_pool = [t for t in pool if t not in prev_tags]
+    need = 7 - len(fresh_pool)
+    if need > 0:                                   # 足りない分だけ既出から補充
+        fresh_pool += random.sample([t for t in pool if t in prev_tags],
+                                    min(need, len(pool) - len(fresh_pool)))
+    picked = cat_tags + random.sample(fresh_pool, min(7, len(fresh_pool)))
+    random.shuffle(picked)
     picked = [t for t in picked if not any(n in t.lower() for n in ng)]
     hashtags = " ".join("#" + t for t in dict.fromkeys(picked))
 
@@ -215,6 +258,10 @@ def post_reel(video_path, caption):
         print(f"公開URL化に失敗: {e}")
         return "FAIL"
 
+    def _abort(status="FAIL"):
+        cleanup_public_url(video_url)        # 失敗時も一時ファイルを残さない
+        return status
+
     print("Step2: コンテナ生成（REELS）")
     d = requests.post(f"{GRAPH}/{ig_id}/media", timeout=180, data={
         "media_type": "REELS", "video_url": video_url,
@@ -223,7 +270,7 @@ def post_reel(video_path, caption):
     if "error" in d:
         err = d["error"]
         print(f"APIエラー: code={err.get('code')} {err.get('message')}")
-        return "TOKEN" if err.get("code") in (190, 102, 104) else "FAIL"
+        return _abort("TOKEN" if err.get("code") in (190, 102, 104) else "FAIL")
     cid = d.get("id")
 
     print("Step3: 処理待ち")
@@ -237,19 +284,20 @@ def post_reel(video_path, caption):
             break
         if code == "ERROR":
             print(f"  変換に失敗: {s.get('status')}")
-            return "FAIL"
+            return _abort()
         print(f"  ...{code} ({(i + 1) * 15}s)")
     else:
         print("  タイムアウト（処理が終わらない）")
-        return "FAIL"
+        return _abort()
 
     print("Step4: 公開")
     p = requests.post(f"{GRAPH}/{ig_id}/media_publish", timeout=120,
                       data={"creation_id": cid, "access_token": token}).json()
     if "error" in p:
         print(f"公開に失敗: {p['error'].get('message')}")
-        return "FAIL"
+        return _abort()
     print(f"  投稿成功: media_id={p.get('id')}")
+    cleanup_public_url(video_url)          # 一時ファイルを残さない
     return "OK:" + str(p.get("id"))
 
 
@@ -309,10 +357,24 @@ def run(only_file=None, now=False):
         print(f"ジッター待機 {wait_s // 60}分{wait_s % 60}秒")
         time.sleep(wait_s)
 
-    chosen = pick_video()
-    if not chosen:
-        return 0
-    return _post(chosen["path"], chosen.get("category", ""))
+    # IG側の取得/変換は体感5割で落ちる（error code 0 / 2207082）。
+    # 1回失敗＝その日の枠を落とす作りだったので、素材を替えて数回粘る。
+    attempts = int(os.environ.get("IG_POST_ATTEMPTS", "3"))
+    retry_wait_s = int(os.environ.get("IG_RETRY_WAIT_S", "90"))
+    tried, rc = [], 1
+    for i in range(1, attempts + 1):
+        chosen = pick_video(exclude=tried)
+        if not chosen:
+            return 0 if i == 1 else rc
+        tried.append(chosen["path"])
+        rc = _post(chosen["path"], _cat(chosen))
+        if rc in (0, 2):                     # 成功 / トークン切れ（粘っても無駄）
+            return rc
+        if i < attempts:
+            print(f"失敗 {i}/{attempts} → {retry_wait_s}秒後に別素材で再挑戦")
+            time.sleep(retry_wait_s)
+    print(f"{attempts}回とも失敗 → 今回は投稿なし")
+    return rc
 
 
 def main():

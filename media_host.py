@@ -9,18 +9,29 @@ Google Drive の uc?export=download URL は Instagram 側が取得に失敗す�
 「直リンクの公開URL」を作ってから Instagram に渡す。
 
 優先順:
-  ① litterbox.catbox.moe（一時ホスト・72時間で自動消滅＝ゴミを残さない）
-  ② catbox.moe（恒久ホスト・フォールバック）
+  ① GitHub Release 資産（gh_release_host.py・投稿後に自動削除）
+  ② catbox.moe（匿名フォールバック）
+  ③ litterbox.catbox.moe（同上・2026-08時点で412/504を返すため最後）
 
-どちらも APIキー不要。プレーンテキストで公開URLを返す。
-Instagram は container 生成時に即取得するので 72h 保持で十分。
+2026-08-04: 匿名ホストが両方落ちた。catbox はアップロードこそ通るが
+配信ドメイン files.catbox.moe が DNS で引けず、Instagram が動画を取得できず
+"Media upload has failed (code 0 / 2207082)" で全滅していた。
+主軸を GitHub Release へ移し、匿名ホストは保険として残す。
+
+返す前に必ず「実際に取得できるURLか」を検証する（上がったつもりの死んだURLを
+IGに渡さないため）。
 """
 import os
+import time
 import requests
+
+import gh_release_host
 
 LITTERBOX_API = "https://litterbox.catbox.moe/resources/internals/api.php"
 CATBOX_API = "https://catbox.moe/user/api.php"
 HTTP_TIMEOUT = 180
+UPLOAD_ATTEMPTS = int(os.environ.get("IG_HOST_ATTEMPTS", "3"))
+UPLOAD_BACKOFF_S = int(os.environ.get("IG_HOST_BACKOFF_S", "20"))
 
 
 def _upload_litterbox(file_path, expire="72h"):
@@ -47,18 +58,64 @@ def _upload_catbox(file_path):
     return url
 
 
-def upload_to_public_url(file_path):
-    """ローカルファイルを匿名ホストへ上げて公開URLを返す。両方失敗時は例外。"""
-    errors = []
-    for name, fn in (("litterbox", _upload_litterbox), ("catbox", _upload_catbox)):
+def verify_public_url(url, expect_bytes=None, attempts=3, wait_s=10):
+    """IGに渡す前に、そのURLが本当に取得できるか確かめる。
+    反映待ちがあるので数回リトライ。最後まで駄目なら例外。"""
+    last = ""
+    for i in range(attempts):
         try:
-            url = fn(file_path)
-            print(f"Hosted via {name}: {url}")
-            return url
+            r = requests.get(url, headers={"Range": "bytes=0-262143"},
+                             stream=True, timeout=60)
+            size = r.headers.get("Content-Range", "").split("/")[-1]
+            if r.status_code in (200, 206):
+                if expect_bytes and size.isdigit() and int(size) != expect_bytes:
+                    last = f"size mismatch {size} != {expect_bytes}"
+                else:
+                    r.close()
+                    return True
+            else:
+                last = f"HTTP {r.status_code}"
+            r.close()
         except Exception as e:
-            print(f"{name} upload failed: {e}")
-            errors.append(f"{name}: {e}")
-    raise RuntimeError("All public hosts failed -> " + " | ".join(errors))
+            last = str(e)
+        if i + 1 < attempts:
+            time.sleep(wait_s)
+    raise RuntimeError(f"公開URLが取得できません({url}): {last}")
+
+
+def cleanup_public_url(url):
+    """投稿が済んだ一時ファイルの後始末（匿名ホストは自動失効なので何もしない）。"""
+    try:
+        return gh_release_host.cleanup(url)
+    except Exception:
+        return False
+
+
+def upload_to_public_url(file_path):
+    """ローカルファイルを公開ホストへ上げ、取得可能を確認した公開URLを返す。
+    全ホスト×全リトライが失敗したときだけ例外。"""
+    expect_bytes = os.path.getsize(file_path)
+    errors = []
+    try:
+        gh_release_host.purge_old_assets()
+    except Exception:
+        pass
+    for attempt in range(1, UPLOAD_ATTEMPTS + 1):
+        for name, fn in (("github", gh_release_host.upload),
+                         ("catbox", _upload_catbox),
+                         ("litterbox", _upload_litterbox)):
+            try:
+                url = fn(file_path)
+                verify_public_url(url, expect_bytes=expect_bytes)
+                print(f"Hosted via {name}: {url}")
+                return url
+            except Exception as e:
+                print(f"{name} upload failed (try {attempt}/{UPLOAD_ATTEMPTS}): {e}")
+                errors.append(f"{name}#{attempt}: {e}")
+        if attempt < UPLOAD_ATTEMPTS:
+            print(f"  ホスト再試行まで{UPLOAD_BACKOFF_S}秒待機")
+            time.sleep(UPLOAD_BACKOFF_S)
+    raise RuntimeError("All public hosts failed -> " + " | ".join(errors[-4:]))
 
 
 if __name__ == "__main__":
