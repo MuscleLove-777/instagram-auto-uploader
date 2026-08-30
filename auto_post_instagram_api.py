@@ -92,11 +92,29 @@ def _norm(p):
     return os.path.normcase(os.path.abspath(p))
 
 
+def _approval_fingerprint_matches(entry):
+    """Only the exact reviewed bytes inherit a snapshot approval."""
+    expected = entry.get("sha256")
+    if not expected:
+        return True
+    import hashlib
+    try:
+        digest = hashlib.sha256()
+        with open(entry["path"], "rb") as source:
+            for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest() == expected
+    except OSError:
+        return False
+
+
 def load_approved_entries():
     d = _load_json(APPROVED_LOG, {})
     out = []
     for x in d.get("approved", []):
         if isinstance(x, dict) and x.get("path"):
+            if not _approval_fingerprint_matches(x):
+                continue
             out.append({"path": x["path"], "category": x.get("category", "")})
         elif isinstance(x, str):
             out.append({"path": x, "category": ""})
