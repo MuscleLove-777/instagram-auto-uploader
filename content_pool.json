@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06 12:31:31 +0900",
+  "generated_at": "2026-09-06 18:54:48 +0900",
   "version": "20260906",
   "rules": {
     "generic_trend_max": 1,
@@ -20,8 +20,8 @@
   ],
   "generic_trend_candidates": [
     "コラボ",
-    "ラーメン",
-    "ビリヤニ"
+    "レシピ",
+    "ラーメン"
   ],
   "lanes": {
     "safe_fitness": {
