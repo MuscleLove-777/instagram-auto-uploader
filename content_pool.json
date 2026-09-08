@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-08 21:09:47 +0900",
-  "version": "20260908",
+  "generated_at": "2026-09-09 08:00:19 +0900",
+  "version": "20260909",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -21,15 +21,15 @@
   ],
   "generic_trend_candidates": [
     "Suica",
-    "ペンギン",
-    "キャラクター"
+    "メイク",
+    "ポスト"
   ],
   "lanes": {
     "safe_fitness": {
       "platforms": [
-        "facebook",
-        "mixi",
         "instagram",
+        "tiktok",
+        "youtube",
         "pinterest",
         "threads",
         "bluesky",
@@ -38,8 +38,8 @@
         "rakuten",
         "fc2",
         "hatena",
-        "tiktok",
-        "youtube"
+        "mixi",
+        "facebook"
       ],
       "base_tags": [
         "筋トレ女子",
@@ -200,9 +200,9 @@
     "mature_muscle": {
       "platforms": [
         "tumblr",
+        "misskey",
         "deviantart",
-        "pixiv",
-        "misskey"
+        "pixiv"
       ],
       "base_tags": [
         "筋肉美",
@@ -250,10 +250,10 @@
     "adult_fanza": {
       "platforms": [
         "pawoo",
-        "livedoor",
         "boards",
         "booru",
-        "endchan"
+        "endchan",
+        "livedoor"
       ],
       "base_tags": [
         "筋肉美女",
@@ -294,83 +294,83 @@
   "platform_focus": {
     "facebook": {
       "lane": "safe_fitness",
-      "action": "amplify",
-      "cadence_hint": "increase_quality_and_frequency"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "mixi": {
       "lane": "safe_fitness",
-      "action": "amplify",
-      "cadence_hint": "increase_quality_and_frequency"
-    },
-    "tumblr": {
-      "lane": "mature_muscle",
-      "action": "amplify",
-      "cadence_hint": "increase_quality_and_frequency"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "ameblo": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "bluesky": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "deviantart": {
       "lane": "mature_muscle",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "fc2": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "hatena": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "instagram": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "lemon8": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "livedoor": {
       "lane": "adult_fanza",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "pawoo": {
       "lane": "adult_fanza",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "pinterest": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "pixiv": {
       "lane": "mature_muscle",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "rakuten": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "threads": {
       "lane": "safe_fitness",
-      "action": "audit_or_low_cadence",
-      "cadence_hint": "verify_link_and_post_log_before_scaling"
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
+    },
+    "tumblr": {
+      "lane": "mature_muscle",
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
     },
     "x": {
       "lane": "mature_muscle",
@@ -406,40 +406,40 @@
       "3aeac08d": 1.051
     },
     "deviantart.title": {
-      "24de42a3": 1.1,
-      "8f3fc275": 1.195,
-      "c53568a4": 0.316,
-      "debd7c78": 0.652,
-      "45dac961": 2.006,
-      "3573b8f1": 0.77,
-      "35c78f47": 0.662,
-      "af35135e": 0.459,
-      "dd9d4530": 1.114,
-      "6415952f": 1.185,
-      "aaef222e": 1.007,
-      "b21f49eb": 1.315,
-      "211c19b9": 2.133,
-      "d8c1492c": 1.114,
-      "30c0f212": 0.909,
-      "4f013b5a": 1.43,
-      "23483c98": 1.608,
-      "6390b548": 2.261,
-      "62516698": 1.292,
-      "8ba95630": 2.066,
-      "c50ea32a": 0.474,
-      "d24b5592": 0.504,
-      "05dbbfa9": 0.758,
-      "ba14c775": 0.755,
-      "c6fb9091": 1.253,
-      "51c7ec92": 1.037,
-      "8d1cea7f": 0.612,
-      "8b652ebf": 0.637,
-      "73e68c7d": 0.849,
-      "f5b2a28d": 0.612,
-      "85fa59e9": 0.281,
-      "5bb88ac6": 0.904,
-      "6329c741": 0.681,
-      "3b06a2dc": 0.909,
+      "24de42a3": 1.105,
+      "8f3fc275": 1.2,
+      "c53568a4": 0.317,
+      "debd7c78": 0.654,
+      "45dac961": 2.014,
+      "3573b8f1": 0.773,
+      "35c78f47": 0.664,
+      "af35135e": 0.461,
+      "dd9d4530": 1.19,
+      "6415952f": 1.19,
+      "aaef222e": 1.011,
+      "b21f49eb": 1.321,
+      "211c19b9": 2.161,
+      "d8c1492c": 1.118,
+      "30c0f212": 0.912,
+      "4f013b5a": 1.436,
+      "23483c98": 1.615,
+      "6390b548": 2.27,
+      "62516698": 1.297,
+      "8ba95630": 1.864,
+      "c50ea32a": 0.476,
+      "d24b5592": 0.506,
+      "05dbbfa9": 0.761,
+      "ba14c775": 0.758,
+      "c6fb9091": 1.258,
+      "51c7ec92": 1.041,
+      "8d1cea7f": 0.615,
+      "8b652ebf": 0.639,
+      "73e68c7d": 0.639,
+      "f5b2a28d": 0.615,
+      "85fa59e9": 0.416,
+      "5bb88ac6": 0.907,
+      "6329c741": 0.684,
+      "3b06a2dc": 0.972,
       "a7ba7109": 0.25
     },
     "youtube.title": {
@@ -467,117 +467,117 @@
       "0b7c18b4": 1.213
     },
     "rakuten.title": {
-      "39d014c5": 0.835,
-      "d00860f3": 1.114,
-      "ed29c19d": 0.607,
-      "f26b1b6e": 0.954,
-      "f83f4007": 0.835,
-      "5387d317": 1.336,
-      "de4f6d3f": 0.742,
-      "53d40f29": 0.668,
-      "6535f78c": 1.114,
-      "07c649e5": 1.114,
-      "edd7de36": 0.668,
-      "a9cae8f6": 0.954,
-      "4635d56f": 0.668,
-      "28105c8a": 0.954,
-      "95080833": 1.114,
-      "489bf883": 0.954,
-      "be604b2f": 1.336,
-      "645fae18": 0.742,
-      "412f2855": 1.114,
-      "5938c5f1": 0.835,
-      "47ed4182": 1.114,
-      "0fa76db2": 2.227
+      "39d014c5": 0.841,
+      "d00860f3": 1.122,
+      "ed29c19d": 0.612,
+      "f26b1b6e": 0.961,
+      "f83f4007": 0.841,
+      "5387d317": 1.346,
+      "de4f6d3f": 0.748,
+      "53d40f29": 0.673,
+      "6535f78c": 1.122,
+      "07c649e5": 1.122,
+      "edd7de36": 0.673,
+      "a9cae8f6": 0.961,
+      "4635d56f": 0.673,
+      "28105c8a": 0.961,
+      "95080833": 0.961,
+      "489bf883": 0.961,
+      "be604b2f": 1.346,
+      "645fae18": 0.748,
+      "412f2855": 1.122,
+      "5938c5f1": 0.841,
+      "47ed4182": 1.122,
+      "0fa76db2": 2.243
     },
     "rakuten.body": {
-      "7830c70e": 0.953,
-      "54869f81": 0.991,
-      "874d5b75": 0.991,
-      "be8c956b": 1.239,
-      "05a02d48": 0.826
+      "7830c70e": 0.958,
+      "54869f81": 0.996,
+      "874d5b75": 0.996,
+      "be8c956b": 1.246,
+      "05a02d48": 0.804
     }
   },
   "channel_weights": {
     "facebook": {
       "weight": 1.0,
-      "cadence_factor": 1.25,
-      "action": "amplify"
+      "cadence_factor": 1.0,
+      "action": "observe_data"
     },
     "tumblr": {
       "weight": 1.0,
-      "cadence_factor": 1.25,
-      "action": "amplify"
+      "cadence_factor": 1.0,
+      "action": "observe_data"
     },
     "mixi": {
       "weight": 0.575,
-      "cadence_factor": 1.25,
-      "action": "amplify"
+      "cadence_factor": 1.0,
+      "action": "observe_data"
     },
     "pinterest": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "instagram": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "threads": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "bluesky": {
       "weight": 0.15,
       "cadence_factor": 0.75,
-      "action": "explore"
+      "action": "observe_data"
     },
     "lemon8": {
       "weight": 0.15,
       "cadence_factor": 0.75,
-      "action": "explore"
+      "action": "observe_data"
     },
     "ameblo": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "rakuten": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "fc2": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "hatena": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "livedoor": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "pixiv": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "deviantart": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "pawoo": {
       "weight": 0.15,
       "cadence_factor": 0.5,
-      "action": "reduce"
+      "action": "observe_data"
     },
     "x": {
       "weight": 0.0,
