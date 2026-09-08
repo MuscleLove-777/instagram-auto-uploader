@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08 09:09:44 +0900",
+  "generated_at": "2026-09-08 15:09:44 +0900",
   "version": "20260908",
   "rules": {
     "generic_trend_max": 1,
@@ -20,9 +20,9 @@
     "GOOGLE_API_KEY"
   ],
   "generic_trend_candidates": [
+    "スポーツ",
     "Astra",
-    "コラボ",
-    "Python"
+    "グッズ"
   ],
   "lanes": {
     "safe_fitness": {
@@ -59,6 +59,7 @@
       ],
       "trend_tags": [
         "AI",
+        "健康",
         "ダイエット"
       ],
       "ng_words": [
@@ -107,7 +108,9 @@
             "fitnessmotivation"
           ],
           "trend_tags": [],
-          "generic_trend_candidates": [],
+          "generic_trend_candidates": [
+            "スポーツ"
+          ],
           "generic_trend_max": 1,
           "max_hashtags": 7,
           "caption_templates": [
@@ -133,7 +136,9 @@
             "fitnessmotivation"
           ],
           "trend_tags": [],
-          "generic_trend_candidates": [],
+          "generic_trend_candidates": [
+            "スポーツ"
+          ],
           "generic_trend_max": 1,
           "max_hashtags": 3,
           "caption_templates": [
@@ -155,7 +160,9 @@
             "fitnessmotivation"
           ],
           "trend_tags": [],
-          "generic_trend_candidates": [],
+          "generic_trend_candidates": [
+            "スポーツ"
+          ],
           "generic_trend_max": 1,
           "max_hashtags": 3,
           "caption_templates": [
@@ -177,7 +184,9 @@
             "fitnessmotivation"
           ],
           "trend_tags": [],
-          "generic_trend_candidates": [],
+          "generic_trend_candidates": [
+            "スポーツ"
+          ],
           "generic_trend_max": 1,
           "max_hashtags": 3,
           "caption_templates": [
@@ -218,6 +227,7 @@
       ],
       "trend_tags": [
         "AI",
+        "健康",
         "ダイエット"
       ],
       "ng_words": [
@@ -265,6 +275,7 @@
       ],
       "trend_tags": [
         "AI",
+        "健康",
         "ダイエット"
       ],
       "ng_words": [],
