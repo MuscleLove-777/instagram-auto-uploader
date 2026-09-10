@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10 09:09:47 +0900",
+  "generated_at": "2026-09-10 15:09:44 +0900",
   "version": "20260910",
   "rules": {
     "generic_trend_max": 1,
@@ -22,7 +22,7 @@
   "generic_trend_candidates": [
     "iPhone",
     "Suica",
-    "アップル"
+    "ブックマーカー"
   ],
   "lanes": {
     "safe_fitness": {
@@ -58,8 +58,8 @@
         "AIアート"
       ],
       "trend_tags": [
-        "ダイエット",
-        "睡眠"
+        "AI",
+        "ジム"
       ],
       "ng_words": [
         "uncensored",
@@ -87,7 +87,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このダイエット×筋肉美、刺さる人には刺さる。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "フォームも仕上がりも教科書級💪 {tags}",
@@ -106,7 +106,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 7,
@@ -132,7 +134,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -154,7 +158,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -176,7 +182,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -217,8 +225,8 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "ダイエット",
-        "睡眠"
+        "AI",
+        "ジム"
       ],
       "ng_words": [
         "porn",
@@ -231,7 +239,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このダイエット×筋肉美、刺さる人には刺さる。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "しょーがないなぁ、特別に見せてあげる。{tags}",
@@ -264,8 +272,8 @@
         "AI美女"
       ],
       "trend_tags": [
-        "ダイエット",
-        "睡眠"
+        "AI",
+        "ジム"
       ],
       "ng_words": [],
       "caption_templates": [
@@ -274,7 +282,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このダイエット×筋肉美、刺さる人には刺さる。{tags}",
+        "このAI×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "全作品まとめはeronaviで。{tags}",
