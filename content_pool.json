@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-02 08:00:20 +0900",
-  "version": "20261002",
+  "generated_at": "2026-10-03 08:00:20 +0900",
+  "version": "20261003",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -55,7 +55,8 @@
       ],
       "trend_tags": [
         "AI",
-        "健康"
+        "健康",
+        "筋肉"
       ],
       "ng_words": [
         "uncensored",
@@ -102,7 +103,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "筋肉"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 7,
@@ -128,7 +131,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "筋肉"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -150,7 +155,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "筋肉"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -172,7 +179,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "筋肉"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -214,7 +223,8 @@
       ],
       "trend_tags": [
         "AI",
-        "健康"
+        "健康",
+        "筋肉"
       ],
       "ng_words": [
         "porn",
@@ -261,7 +271,8 @@
       ],
       "trend_tags": [
         "AI",
-        "健康"
+        "健康",
+        "筋肉"
       ],
       "ng_words": [],
       "caption_templates": [
@@ -402,40 +413,40 @@
       "3aeac08d": 0.642
     },
     "deviantart.title": {
-      "24de42a3": 1.086,
-      "8f3fc275": 1.182,
-      "c53568a4": 0.389,
-      "debd7c78": 0.743,
-      "45dac961": 1.527,
-      "3573b8f1": 0.886,
-      "35c78f47": 0.639,
-      "af35135e": 0.443,
-      "dd9d4530": 1.247,
-      "6415952f": 1.01,
-      "aaef222e": 0.972,
-      "b21f49eb": 1.144,
-      "211c19b9": 1.816,
-      "d8c1492c": 1.029,
-      "30c0f212": 1.384,
-      "4f013b5a": 1.395,
+      "24de42a3": 1.071,
+      "8f3fc275": 1.165,
+      "c53568a4": 0.383,
+      "debd7c78": 0.781,
+      "45dac961": 1.538,
+      "3573b8f1": 0.895,
+      "35c78f47": 0.629,
+      "af35135e": 0.437,
+      "dd9d4530": 1.262,
+      "6415952f": 0.995,
+      "aaef222e": 0.958,
+      "b21f49eb": 1.014,
+      "211c19b9": 1.789,
+      "d8c1492c": 1.057,
+      "30c0f212": 1.364,
+      "4f013b5a": 1.392,
       "23483c98": 1.65,
-      "6390b548": 2.018,
-      "62516698": 1.553,
-      "8ba95630": 1.716,
-      "c50ea32a": 0.457,
-      "d24b5592": 1.029,
-      "05dbbfa9": 0.792,
-      "ba14c775": 0.686,
-      "c6fb9091": 1.112,
-      "51c7ec92": 0.982,
-      "8d1cea7f": 0.572,
-      "8b652ebf": 0.615,
-      "73e68c7d": 1.075,
-      "f5b2a28d": 0.591,
-      "85fa59e9": 0.4,
-      "5bb88ac6": 0.801,
-      "6329c741": 0.658,
-      "3b06a2dc": 1.215,
+      "6390b548": 2.012,
+      "62516698": 1.615,
+      "8ba95630": 1.702,
+      "c50ea32a": 0.451,
+      "d24b5592": 1.048,
+      "05dbbfa9": 0.781,
+      "ba14c775": 0.733,
+      "c6fb9091": 1.114,
+      "51c7ec92": 1.024,
+      "8d1cea7f": 0.606,
+      "8b652ebf": 0.606,
+      "73e68c7d": 1.093,
+      "f5b2a28d": 0.582,
+      "85fa59e9": 0.394,
+      "5bb88ac6": 0.789,
+      "6329c741": 0.648,
+      "3b06a2dc": 1.197,
       "a7ba7109": 0.25
     },
     "youtube.title": {
