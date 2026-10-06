@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-03 08:00:20 +0900",
-  "version": "20261003",
+  "generated_at": "2026-10-07 08:00:23 +0900",
+  "version": "20261007",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -55,8 +55,9 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
-        "筋肉"
+        "ダイエット",
+        "美容",
+        "グラビア"
       ],
       "ng_words": [
         "uncensored",
@@ -103,9 +104,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "筋肉"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 7,
@@ -131,9 +130,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "筋肉"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -155,9 +152,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "筋肉"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -179,9 +174,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "筋肉"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -223,8 +216,9 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
-        "筋肉"
+        "ダイエット",
+        "美容",
+        "グラビア"
       ],
       "ng_words": [
         "porn",
@@ -271,8 +265,9 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
-        "筋肉"
+        "ダイエット",
+        "美容",
+        "グラビア"
       ],
       "ng_words": [],
       "caption_templates": [
@@ -413,41 +408,41 @@
       "3aeac08d": 0.642
     },
     "deviantart.title": {
-      "24de42a3": 1.071,
-      "8f3fc275": 1.165,
-      "c53568a4": 0.383,
-      "debd7c78": 0.781,
-      "45dac961": 1.538,
-      "3573b8f1": 0.895,
-      "35c78f47": 0.629,
-      "af35135e": 0.437,
-      "dd9d4530": 1.262,
-      "6415952f": 0.995,
-      "aaef222e": 0.958,
-      "b21f49eb": 1.014,
-      "211c19b9": 1.789,
-      "d8c1492c": 1.057,
-      "30c0f212": 1.364,
-      "4f013b5a": 1.392,
-      "23483c98": 1.65,
-      "6390b548": 2.012,
-      "62516698": 1.615,
-      "8ba95630": 1.702,
-      "c50ea32a": 0.451,
-      "d24b5592": 1.048,
-      "05dbbfa9": 0.781,
-      "ba14c775": 0.733,
-      "c6fb9091": 1.114,
-      "51c7ec92": 1.024,
-      "8d1cea7f": 0.606,
-      "8b652ebf": 0.606,
-      "73e68c7d": 1.093,
-      "f5b2a28d": 0.582,
-      "85fa59e9": 0.394,
-      "5bb88ac6": 0.789,
-      "6329c741": 0.648,
-      "3b06a2dc": 1.197,
-      "a7ba7109": 0.25
+      "24de42a3": 0.955,
+      "8f3fc275": 1.161,
+      "c53568a4": 0.416,
+      "debd7c78": 0.803,
+      "45dac961": 1.534,
+      "3573b8f1": 0.913,
+      "35c78f47": 0.627,
+      "af35135e": 0.435,
+      "dd9d4530": 1.077,
+      "6415952f": 1.021,
+      "aaef222e": 0.955,
+      "b21f49eb": 1.084,
+      "211c19b9": 1.673,
+      "d8c1492c": 1.075,
+      "30c0f212": 1.394,
+      "4f013b5a": 1.405,
+      "23483c98": 1.646,
+      "6390b548": 2.007,
+      "62516698": 1.766,
+      "8ba95630": 1.77,
+      "c50ea32a": 0.45,
+      "d24b5592": 1.045,
+      "05dbbfa9": 0.812,
+      "ba14c775": 0.759,
+      "c6fb9091": 1.111,
+      "51c7ec92": 1.049,
+      "8d1cea7f": 0.483,
+      "8b652ebf": 0.604,
+      "73e68c7d": 1.124,
+      "f5b2a28d": 0.581,
+      "85fa59e9": 0.435,
+      "5bb88ac6": 0.787,
+      "6329c741": 0.646,
+      "3b06a2dc": 1.09,
+      "a7ba7109": 0.309
     },
     "youtube.title": {
       "e0e12957": 1.025,
