@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-09 08:01:18 +0900",
-  "version": "20261009",
+  "generated_at": "2026-10-13 08:00:11 +0900",
+  "version": "20261013",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -54,7 +54,9 @@
         "AIアート"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "生成AI",
+        "姿勢"
       ],
       "ng_words": [
         "uncensored",
@@ -232,7 +234,9 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "生成AI",
+        "姿勢"
       ],
       "ng_words": [
         "porn",
@@ -278,7 +282,9 @@
         "AI美女"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "生成AI",
+        "姿勢"
       ],
       "ng_words": [],
       "caption_templates": [
@@ -310,6 +316,11 @@
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
     },
+    "facebook": {
+      "lane": "safe_fitness",
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
+    },
     "ameblo": {
       "lane": "safe_fitness",
       "action": "observe_data",
@@ -322,11 +333,6 @@
     },
     "deviantart": {
       "lane": "mature_muscle",
-      "action": "observe_data",
-      "cadence_hint": "verify_measurement_before_reallocation"
-    },
-    "facebook": {
-      "lane": "safe_fitness",
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
     },
@@ -392,92 +398,42 @@
     }
   },
   "variant_weights": {
-    "tumblr.caption": {
-      "0d115b4f": 1.213,
-      "1e53ae32": 0.511,
-      "b8acef31": 0.798,
-      "18927481": 1.792,
-      "cce7b575": 0.854,
-      "923b3ad1": 0.986,
-      "3dc90978": 1.314,
-      "dd699064": 1.752,
-      "af375567": 1.095,
-      "64362e89": 0.986,
-      "65eb7bd5": 0.809,
-      "d1448a80": 0.263,
-      "a913a15c": 0.299,
-      "d05d35f2": 0.493,
-      "7b284970": 1.971,
-      "8998d2e5": 0.657,
-      "b5a0eef4": 1.095,
-      "a9141b6e": 1.068,
-      "a35b58a8": 1.183,
-      "bbcd758b": 0.607,
-      "4d1016c5": 1.889,
-      "ee41a62e": 0.25,
-      "b2010ce5": 1.577,
-      "3aeac08d": 0.657
-    },
     "deviantart.title": {
-      "24de42a3": 0.945,
-      "8f3fc275": 1.149,
-      "c53568a4": 0.411,
-      "debd7c78": 0.794,
-      "45dac961": 1.518,
-      "3573b8f1": 0.896,
-      "35c78f47": 0.621,
-      "af35135e": 0.431,
-      "dd9d4530": 1.316,
-      "6415952f": 1.01,
-      "aaef222e": 0.945,
-      "b21f49eb": 1.072,
-      "211c19b9": 1.655,
-      "d8c1492c": 1.063,
-      "30c0f212": 1.412,
-      "4f013b5a": 1.294,
-      "23483c98": 1.628,
-      "6390b548": 1.986,
-      "62516698": 1.747,
-      "8ba95630": 1.751,
-      "c50ea32a": 0.445,
-      "d24b5592": 1.034,
-      "05dbbfa9": 0.933,
-      "ba14c775": 0.751,
-      "c6fb9091": 1.1,
-      "51c7ec92": 0.913,
-      "8d1cea7f": 0.845,
-      "8b652ebf": 0.598,
-      "73e68c7d": 0.927,
-      "f5b2a28d": 0.575,
-      "85fa59e9": 0.431,
-      "5bb88ac6": 0.778,
-      "6329c741": 0.639,
-      "3b06a2dc": 1.079,
-      "a7ba7109": 0.306
-    },
-    "youtube.title": {
-      "e0e12957": 1.025,
-      "4a0cdd28": 1.165,
-      "f6092e4e": 1.004,
-      "b1b5df34": 0.956,
-      "29b2f257": 1.165,
-      "177d303b": 0.807,
-      "2c4804e0": 0.857,
-      "9a6b0229": 0.896,
-      "c4995c17": 1.121,
-      "ed0e5362": 1.004
-    },
-    "youtube.desc": {
-      "a6b65dcd": 0.799,
-      "6fad0332": 1.219,
-      "ce2ac9ae": 0.676,
-      "a1e9fe2e": 1.199,
-      "549568fa": 1.107
-    },
-    "youtube.cta": {
-      "fe6dbc36": 0.865,
-      "532d2222": 0.921,
-      "0b7c18b4": 1.213
+      "24de42a3": 0.919,
+      "8f3fc275": 0.98,
+      "c53568a4": 0.432,
+      "debd7c78": 0.772,
+      "45dac961": 1.475,
+      "3573b8f1": 0.889,
+      "35c78f47": 0.603,
+      "af35135e": 0.419,
+      "dd9d4530": 1.235,
+      "6415952f": 0.98,
+      "aaef222e": 0.919,
+      "b21f49eb": 1.042,
+      "211c19b9": 1.609,
+      "d8c1492c": 1.034,
+      "30c0f212": 1.405,
+      "4f013b5a": 1.376,
+      "23483c98": 1.425,
+      "6390b548": 1.93,
+      "62516698": 1.768,
+      "8ba95630": 1.714,
+      "c50ea32a": 0.432,
+      "d24b5592": 1.005,
+      "05dbbfa9": 0.937,
+      "ba14c775": 0.73,
+      "c6fb9091": 1.069,
+      "51c7ec92": 0.934,
+      "8d1cea7f": 0.854,
+      "8b652ebf": 0.581,
+      "73e68c7d": 1.142,
+      "f5b2a28d": 0.558,
+      "85fa59e9": 0.419,
+      "5bb88ac6": 0.63,
+      "6329c741": 1.437,
+      "3b06a2dc": 1.048,
+      "a7ba7109": 0.297
     }
   },
   "channel_weights": {
