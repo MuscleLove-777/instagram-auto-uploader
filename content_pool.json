@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-18 08:00:19 +0900",
-  "version": "20261018",
+  "generated_at": "2026-10-19 08:01:25 +0900",
+  "version": "20261019",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -54,7 +54,7 @@
         "AIアート"
       ],
       "trend_tags": [
-        "AI"
+        "ジム"
       ],
       "ng_words": [
         "uncensored",
@@ -82,7 +82,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "このジム×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "フォームも仕上がりも教科書級💪 {tags}",
@@ -101,7 +101,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 7,
@@ -147,7 +149,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -169,7 +173,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -191,7 +197,9 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [],
+          "trend_tags": [
+            "ジム"
+          ],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -232,7 +240,7 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "AI"
+        "ジム"
       ],
       "ng_words": [
         "porn",
@@ -245,7 +253,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "このジム×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "しょーがないなぁ、特別に見せてあげる。{tags}",
@@ -278,7 +286,7 @@
         "AI美女"
       ],
       "trend_tags": [
-        "AI"
+        "ジム"
       ],
       "ng_words": [],
       "caption_templates": [
@@ -287,7 +295,7 @@
         "これは仕上がりエグい。{tags}",
         "筋肉女子、やっぱ最高。{tags}",
         "バキバキ。でも美しい。{tags}",
-        "このAI×筋肉美、刺さる人には刺さる。{tags}",
+        "このジム×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
         "全作品まとめはeronaviで。{tags}",
@@ -393,39 +401,39 @@
   },
   "variant_weights": {
     "deviantart.title": {
-      "24de42a3": 0.811,
+      "24de42a3": 0.829,
       "8f3fc275": 0.974,
       "c53568a4": 0.492,
       "debd7c78": 0.767,
-      "45dac961": 1.479,
-      "3573b8f1": 0.901,
+      "45dac961": 1.478,
+      "3573b8f1": 0.9,
       "35c78f47": 0.599,
       "af35135e": 0.416,
       "dd9d4530": 1.227,
       "6415952f": 1.013,
-      "aaef222e": 0.913,
+      "aaef222e": 0.912,
       "b21f49eb": 1.035,
-      "211c19b9": 1.598,
-      "d8c1492c": 0.886,
-      "30c0f212": 1.396,
-      "4f013b5a": 1.367,
+      "211c19b9": 1.484,
+      "d8c1492c": 0.918,
+      "30c0f212": 1.395,
+      "4f013b5a": 1.366,
       "23483c98": 1.456,
       "6390b548": 1.917,
-      "62516698": 1.698,
-      "8ba95630": 1.703,
+      "62516698": 1.717,
+      "8ba95630": 1.702,
       "c50ea32a": 0.429,
-      "d24b5592": 0.999,
+      "d24b5592": 0.998,
       "05dbbfa9": 0.95,
       "ba14c775": 0.725,
       "c6fb9091": 1.062,
-      "51c7ec92": 0.883,
+      "51c7ec92": 0.936,
       "8d1cea7f": 0.848,
-      "8b652ebf": 0.462,
-      "73e68c7d": 1.215,
-      "f5b2a28d": 0.555,
+      "8b652ebf": 0.558,
+      "73e68c7d": 1.214,
+      "f5b2a28d": 0.456,
       "85fa59e9": 0.416,
       "5bb88ac6": 0.948,
-      "6329c741": 1.525,
+      "6329c741": 1.524,
       "3b06a2dc": 1.041,
       "a7ba7109": 0.295
     }
