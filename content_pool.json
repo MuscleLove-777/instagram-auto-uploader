@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-29 08:00:12 +0900",
-  "version": "20261029",
+  "generated_at": "2026-10-30 09:31:32 +0900",
+  "version": "20261030",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -54,7 +54,8 @@
         "AIアート"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "ダイエット"
       ],
       "ng_words": [
         "uncensored",
@@ -232,7 +233,8 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "ダイエット"
       ],
       "ng_words": [
         "porn",
@@ -278,7 +280,8 @@
         "AI美女"
       ],
       "trend_tags": [
-        "AI"
+        "AI",
+        "ダイエット"
       ],
       "ng_words": [],
       "caption_templates": [
