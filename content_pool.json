@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-31 08:00:32 +0900",
-  "version": "20261031",
+  "generated_at": "2026-11-01 08:00:31 +0900",
+  "version": "20261101",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -9,7 +9,9 @@
     "blocked_platforms_manual_only": true,
     "blocked_cta_destinations_removed": true,
     "note": "uploaderは自レーンのみ読む。generic_trend_candidatesから使うのは最大1個。",
-    "utm_guide": "発リンクには utm_source=<媒体名>&utm_medium=autopost を必ず付与する。pool_loader.as_insights(lane, platform=媒体名) がCTA内URLへ自動付与する。投稿にはハブor自ブログへの計測可能リンクを最低1本入れる。"
+    "utm_guide": "宣伝先は指定Linktreeのみ。URLに追跡パラメータを付けない。",
+    "promotion_destination": "https://linktr.ee/ILoveMyCats",
+    "promotion_link_only": true
   },
   "ng_words_global": [
     "アツロウ",
@@ -25,7 +27,6 @@
       "platforms": [
         "instagram",
         "tiktok",
-        "youtube",
         "pinterest",
         "threads",
         "bluesky",
@@ -55,7 +56,6 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
         "美容"
       ],
       "ng_words": [
@@ -136,7 +136,14 @@
             "何が刺さったか、一言で教えて。{tags}",
             "鍛えた体の魅力、つい見入ってしまう。{tags}",
             "筋肉美を楽しむ時間。{tags}"
-          ]
+          ],
+          "cta_lines": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "priority_urls": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "affiliate_cards": []
         },
         "threads": {
           "base_tags": [
@@ -158,7 +165,14 @@
             "美しい、で片づけるには強すぎる。{tags}",
             "この仕上がり、何回でも見てしまう。{tags}",
             "筋肉のラインまで美しい。努力がそのまま形になってる。{tags}"
-          ]
+          ],
+          "cta_lines": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "priority_urls": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "affiliate_cards": []
         },
         "bluesky": {
           "base_tags": [
@@ -180,7 +194,14 @@
             "美しい、で片づけるには強すぎる。{tags}",
             "この仕上がり、何回でも見てしまう。{tags}",
             "筋肉のラインまで美しい。努力がそのまま形になってる。{tags}"
-          ]
+          ],
+          "cta_lines": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "priority_urls": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "affiliate_cards": []
         },
         "lemon8": {
           "base_tags": [
@@ -202,15 +223,21 @@
             "美しい、で片づけるには強すぎる。{tags}",
             "この仕上がり、何回でも見てしまう。{tags}",
             "筋肉のラインまで美しい。努力がそのまま形になってる。{tags}"
-          ]
+          ],
+          "cta_lines": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "priority_urls": [
+            "https://linktr.ee/ILoveMyCats"
+          ],
+          "affiliate_cards": []
         }
       },
       "cta_lines": [
-        "まとめハブはこちら → https://musclelove-777.github.io/",
-        "フォローで毎日筋肉美が届く💪"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "priority_urls": [
-        "https://musclelove-777.github.io/"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "affiliate_cards": []
     },
@@ -235,7 +262,6 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
         "美容"
       ],
       "ng_words": [
@@ -257,11 +283,10 @@
         "未公開はもっとすごい。{tags}"
       ],
       "cta_lines": [
-        "未公開・高解像度はPatreonで → https://www.patreon.com/MuscleGirlLove"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "priority_urls": [
-        "https://www.patreon.com/MuscleGirlLove",
-        "https://musclelove-777.github.io/"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "affiliate_cards": []
     },
@@ -283,7 +308,6 @@
       ],
       "trend_tags": [
         "AI",
-        "健康",
         "美容"
       ],
       "ng_words": [],
@@ -296,16 +320,14 @@
         "このAI×筋肉美、刺さる人には刺さる。{tags}",
         "継続は力なり。今日も積み上げ💪 {tags}",
         "Strong is beautiful💪 {tags}",
-        "全作品まとめはeronaviで。{tags}",
+        "今日の作品、じっくり楽しんで。{tags}",
         "今日の推し筋肉、保存推奨。{tags}"
       ],
       "cta_lines": [
-        "未公開はPatreon → https://www.patreon.com/MuscleGirlLove",
-        "作品ガイド・ランキングはeronaviで検索"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "priority_urls": [
-        "https://www.patreon.com/MuscleGirlLove",
-        "https://musclelove-777.github.io/"
+        "https://linktr.ee/ILoveMyCats"
       ],
       "affiliate_cards": []
     }
