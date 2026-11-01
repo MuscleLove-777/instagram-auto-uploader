@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01 08:00:31 +0900",
-  "version": "20261101",
+  "generated_at": "2026-11-02 08:01:31 +0900",
+  "version": "20261102",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -56,7 +56,7 @@
       ],
       "trend_tags": [
         "AI",
-        "美容"
+        "睡眠"
       ],
       "ng_words": [
         "uncensored",
@@ -262,7 +262,7 @@
       ],
       "trend_tags": [
         "AI",
-        "美容"
+        "睡眠"
       ],
       "ng_words": [
         "porn",
@@ -308,7 +308,7 @@
       ],
       "trend_tags": [
         "AI",
-        "美容"
+        "睡眠"
       ],
       "ng_words": [],
       "caption_templates": [
