@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05 08:00:38 +0900",
-  "version": "20261105",
+  "generated_at": "2026-11-06 08:02:30 +0900",
+  "version": "20261106",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -57,7 +57,7 @@
       "trend_tags": [
         "AI",
         "ダイエット",
-        "美容"
+        "生成AI"
       ],
       "ng_words": [
         "uncensored",
@@ -264,7 +264,7 @@
       "trend_tags": [
         "AI",
         "ダイエット",
-        "美容"
+        "生成AI"
       ],
       "ng_words": [
         "porn",
@@ -311,7 +311,7 @@
       "trend_tags": [
         "AI",
         "ダイエット",
-        "美容"
+        "生成AI"
       ],
       "ng_words": [],
       "caption_templates": [
