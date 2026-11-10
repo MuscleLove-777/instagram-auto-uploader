@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-08 08:00:29 +0900",
-  "version": "20261108",
+  "generated_at": "2026-11-10 09:21:56 +0900",
+  "version": "20261110",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -56,7 +56,6 @@
       ],
       "trend_tags": [
         "AI",
-        "生成AI",
         "ボディビル",
         "ダイエット",
         "美容"
@@ -273,7 +272,6 @@
       ],
       "trend_tags": [
         "AI",
-        "生成AI",
         "ボディビル",
         "ダイエット",
         "美容"
@@ -322,7 +320,6 @@
       ],
       "trend_tags": [
         "AI",
-        "生成AI",
         "ボディビル",
         "ダイエット",
         "美容"
@@ -352,11 +349,6 @@
   "platform_focus": {
     "facebook": {
       "lane": "safe_fitness",
-      "action": "observe_data",
-      "cadence_hint": "verify_measurement_before_reallocation"
-    },
-    "tumblr": {
-      "lane": "mature_muscle",
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
     },
@@ -427,6 +419,11 @@
     },
     "threads": {
       "lane": "safe_fitness",
+      "action": "observe_data",
+      "cadence_hint": "verify_measurement_before_reallocation"
+    },
+    "tumblr": {
+      "lane": "mature_muscle",
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
     },
@@ -525,9 +522,9 @@
     }
   },
   "revenue_mix": {
-    "status": "RECORDED_ONLY",
-    "has_actual": false,
+    "status": "HOLD",
+    "has_actual": null,
     "share_pct": {},
-    "note": "金額は非公開。記録済み台帳の構成比のみ。全販路の売上確定や増枠許可ではない。"
+    "note": "売上内訳は未確認。注力先や増枠の根拠にしない。金額は非公開。"
   }
 }
