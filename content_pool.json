@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-11 09:01:27 +0900",
-  "version": "20261111",
+  "generated_at": "2026-11-12 08:00:37 +0900",
+  "version": "20261112",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -55,9 +55,7 @@
         "AIアート"
       ],
       "trend_tags": [
-        "AI",
-        "ボディビル",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [
         "uncensored",
@@ -104,9 +102,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "ボディビル"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 7,
@@ -159,9 +155,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "ボディビル"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -190,9 +184,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "ボディビル"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -221,9 +213,7 @@
             "strongwomen",
             "fitnessmotivation"
           ],
-          "trend_tags": [
-            "ボディビル"
-          ],
+          "trend_tags": [],
           "generic_trend_candidates": [],
           "generic_trend_max": 1,
           "max_hashtags": 3,
@@ -270,9 +260,7 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "AI",
-        "ボディビル",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [
         "porn",
@@ -317,9 +305,7 @@
         "AI美女"
       ],
       "trend_tags": [
-        "AI",
-        "ボディビル",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [],
       "caption_templates": [
