@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-14 08:01:14 +0900",
-  "version": "20261114",
+  "generated_at": "2026-11-15 08:00:32 +0900",
+  "version": "20261115",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
