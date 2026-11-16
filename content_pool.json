@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-16 08:01:20 +0900",
-  "version": "20261116",
+  "generated_at": "2026-11-17 08:05:20 +0900",
+  "version": "20261117",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -330,12 +330,12 @@
     }
   },
   "platform_focus": {
-    "facebook": {
+    "ameblo": {
       "lane": "safe_fitness",
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
     },
-    "ameblo": {
+    "facebook": {
       "lane": "safe_fitness",
       "action": "observe_data",
       "cadence_hint": "verify_measurement_before_reallocation"
