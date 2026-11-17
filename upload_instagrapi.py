@@ -12,6 +12,7 @@
   python upload_instagrapi.py            # 1投稿
   python upload_instagrapi.py --dry-run  # ログイン/投稿せず、素材選定・ゲート・本文生成だけ確認
 """
+from publication_evidence import record_publication_result, identity_from_url
 import json
 import os
 import random
@@ -167,6 +168,8 @@ def build_tags(ins):
     return uniq[:MAX_HASHTAGS]
 
 
+from promotion_policy import normalize_plain_promotion
+
 def build_caption(ins, tags):
     templates = _scrub(ins.get("recommended_templates") or FALLBACK_CAPS) or FALLBACK_CAPS
     ctas = _scrub(ins.get("recommended_ctas") or FALLBACK_CTA) or FALLBACK_CTA
@@ -179,7 +182,7 @@ def build_caption(ins, tags):
 
     body = str(template).replace("{tags}", "").replace("{hashtags}", "").strip()
     caption = f"{body}\n\n{cta}\n\n{hashtags}".strip()
-    return caption, cap_vid, cta_vid
+    return normalize_plain_promotion(caption, max_length=2200), cap_vid, cta_vid
 
 
 def load_ng_globals():
@@ -271,6 +274,9 @@ def main():
 
     code = getattr(media_obj, "code", "") or getattr(media_obj, "pk", "")
     print(f"Success! https://www.instagram.com/p/{code}/")
+    record_publication_result("instagram", {"caption": caption},
+                              post_id=getattr(media_obj, "pk", "") or getattr(media_obj, "code", ""),
+                              confirmed=True, variants={"instagram.caption": cap_vid, "instagram.cta": cta_vid})
     record_posted(chosen.name)
     log_post(PLATFORM, {
         "media_code": str(code),

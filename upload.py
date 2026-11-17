@@ -18,13 +18,19 @@ M国憲法「何もしなくても動く完全自動運営」準拠:
   発信物に固有名詞を出さない(NGワード二重ガード, 第4条) / Instagram安全側(露骨NSFW除外)。
 制限: Instagram Content Publishing は 24時間あたり 50投稿まで。画像はJPEGのみ受理。
 """
+from publication_evidence import record_publication_result, identity_from_url
+from promotion_policy import CANONICAL_URL, canonical_cta, strip_plain_promotion, normalize_plain_promotion, normalize_html_promotion
 import sys
+import argparse
 import json
 import os
 import random
 import time
 from datetime import datetime, timezone, timedelta
-import requests
+try:
+    import requests
+except ImportError:
+    requests = None
 
 JST = timezone(timedelta(hours=9))
 
@@ -39,6 +45,8 @@ PATREON_LINK = "https://www.patreon.com/c/MuscleLove?utm_source=instagram&utm_me
 HUB_LINK = "https://musclelove-777.github.io/?utm_source=instagram&utm_medium=autopost"
 
 IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp'}
+DRY_RUN_MEDIA_NAME = os.environ.get("INSTAGRAM_DRY_RUN_MEDIA_NAME", "training_pose_sample.jpg")
+DRY_RUN_PATH = "dry_run_instagram_preview.json"
 VIDEO_EXTENSIONS = {'.mp4', '.mov'}  # InstagramはREELSでmp4/mov対応（GIFは不可）
 UPLOADED_LOG = "uploaded_instagram.json"
 
@@ -49,6 +57,16 @@ NG_WORDS = ['アツロウ', 'あつろう', 'atsuro', 'Atsuro', 'ATSURO']
 NSFW_KEYWORDS = ['nsfw', 'nude', 'naked', 'erotic', 'xxx', 'porn', ' sex', 'エロ', '裸', 'ヌード']
 
 # --- タグマッピング（ファイル名 → 関連ハッシュタグ） ---
+SAFE_FITNESS_NG_WORDS = [
+    'uncensored', 'sexy', 'nude', 'porn', 'fetish', 'adult', 'nsfw',
+    '18+', 'erotic', 'xxx', 'naked',
+    'armpit', 'armpitfetish', 'thicc',
+]
+OPERATIONAL_BLOCK_TERMS = [
+    'GOOGLE_API_KEY', 'Google API', 'Google Cloud Console',
+    'googleapiclient', 'googleapis', 'client_secret', 'access_secret',
+]
+
 CONTENT_TAG_MAP = {
     'training': ['筋トレ', 'workout', 'training', 'gym', 'fitness', '筋トレ女子', 'gymgirl'],
     'workout': ['筋トレ', 'workout', 'training', 'gym', 'fitness', '筋トレ女子', 'gymgirl'],
@@ -109,6 +127,23 @@ def _load_pool():
         return {}
 
 
+def _scan_terms(text, terms):
+    text_lower = str(text).lower()
+    hits = []
+    for term in terms:
+        needle = str(term).strip()
+        if not needle:
+            continue
+        if needle.lower() in text_lower and needle not in hits:
+            hits.append(needle)
+    return hits
+
+
+def _blocked_terms(pool=None):
+    pool = pool or {}
+    return list(pool.get("avoid_tags", [])) + SAFE_FITNESS_NG_WORDS + NG_WORDS + OPERATIONAL_BLOCK_TERMS
+
+
 # ===== Google Drive =====
 
 def list_gdrive_media(folder_id):
@@ -158,7 +193,14 @@ def generate_tags(name, pool=None):
         if t.lower() not in seen:
             seen.add(t.lower())
             unique.append(t)
-    return unique[:20]
+    avoid = [str(w).lower() for w in _blocked_terms(pool)]
+    safe_tags = []
+    for tag in unique:
+        low = str(tag).lower()
+        if any(ng and ng in low for ng in avoid):
+            continue
+        safe_tags.append(tag)
+    return safe_tags[:20]
 
 
 def build_caption(name, tags, pool=None):
@@ -177,12 +219,13 @@ def build_caption(name, tags, pool=None):
     ctas = pool.get("recommended_ctas", []) or CTA_LINES
     caption += "\n\n" + random.choice(ctas)
 
+    caption = normalize_plain_promotion(caption, max_length=2200)
+
     # NGワード二重ガード（pool由来NG + ハードコードNG）: 固有名詞流出を機械的に阻止
-    ng_words = list(pool.get("avoid_tags", [])) + NG_WORDS
-    for ng in set(ng_words):
-        if ng and ng in caption:
-            print(f"NG word detected: {ng}")
-            return None
+    hits = _scan_terms(caption, _blocked_terms(pool))
+    if hits:
+        print(f"NG word detected: {', '.join(hits)}")
+        return None
     return caption
 
 
@@ -190,6 +233,95 @@ def is_nsfw(name):
     """ファイル名から露骨NSFWの可能性を判定（Instagram安全側に倒す）"""
     name_lower = name.lower()
     return any(kw in name_lower for kw in NSFW_KEYWORDS)
+
+
+def env_flag(name, default=False):
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    return raw.lower() in {"1", "true", "yes", "on"}
+
+
+def list_local_media(dl_dir="media"):
+    media = []
+    if not os.path.isdir(dl_dir):
+        return media
+    for root, dirs, filenames in os.walk(dl_dir):
+        for fname in filenames:
+            ext = os.path.splitext(fname)[1].lower()
+            if ext in IMAGE_EXTENSIONS or ext in VIDEO_EXTENSIONS:
+                media.append({
+                    "name": fname,
+                    "local_path": os.path.join(root, fname),
+                    "kind": "video" if ext in VIDEO_EXTENSIONS else "image",
+                })
+    return media
+
+
+def choose_dry_run_media(sample_name=None):
+    local = [item for item in list_local_media() if not is_nsfw(item["name"])]
+    if local:
+        return random.choice(local), "local media folder"
+    name = sample_name or DRY_RUN_MEDIA_NAME
+    kind = "video" if os.path.splitext(name)[1].lower() in VIDEO_EXTENSIONS else "image"
+    return {"name": name, "local_path": "", "kind": kind}, "synthetic sample"
+
+
+def run_dry_run(sample_name=None):
+    now = datetime.now(JST)
+    item, source = choose_dry_run_media(sample_name)
+    pool = _load_pool()
+    if pool:
+        print(f"Pool loaded: {pool.get('updated_at_jst', '?')}")
+    else:
+        print("Pool unavailable: hardcoded copy will be used.")
+
+    tags = generate_tags(item["name"], pool)
+    caption = build_caption(item["name"], tags, pool)
+    if caption is None:
+        print("Caption contains NG words, dry-run failed.")
+        return 1
+
+    preview_text = "\n".join([item["name"], " ".join(tags), caption])
+    hits = _scan_terms(preview_text, _blocked_terms(pool))
+    if hits:
+        print(f"Preview blocked terms: {', '.join(hits)}")
+        return 1
+
+    payload = {
+        "mode": "dry-run",
+        "generated_at": now.strftime("%Y-%m-%d %H:%M:%S %z"),
+        "platform": "instagram",
+        "lane": "safe_fitness",
+        "media_source": source,
+        "selected": item,
+        "tags": tags,
+        "caption": caption,
+        "caption_length": len(caption),
+        "content_pool": pool.get("updated_at_jst", ""),
+        "platform_focus": pool.get("platform_focus", {}),
+        "conversion_focus": pool.get("conversion_focus", {}),
+        "safety": {
+            "blocked_terms": [],
+            "no_login": True,
+            "no_download": True,
+            "no_upload": True,
+            "no_log_write": True,
+            "no_notification": True,
+        },
+    }
+    with open(DRY_RUN_PATH, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    print("Instagram Auto Uploader DRY RUN")
+    print(f"Time: {now.strftime('%Y-%m-%d %H:%M JST')}")
+    print(f"Media source: {source}")
+    print(f"Selected: {item['name']} ({item['kind']})")
+    print(f"Tags: {', '.join(tags)}")
+    print(f"Caption length: {len(caption)}")
+    print(f"Dry-run written: {DRY_RUN_PATH}")
+    print("DRY RUN OK: no auth, download, upload, log write, or notification was attempted.")
+    return 0
 
 
 def ensure_jpeg(path):
@@ -328,6 +460,18 @@ def _print_missing_secrets(missing):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true", help="Build an Instagram post preview without auth or upload.")
+    parser.add_argument("--sample-name", default="", help="Synthetic media name for dry-run when no local media exists.")
+    args = parser.parse_args()
+
+    if args.dry_run or env_flag("INSTAGRAM_DRY_RUN") or env_flag("DRY_RUN"):
+        return run_dry_run(args.sample_name.strip() or None)
+
+    if requests is None:
+        print("ERROR: requests is required for live Instagram upload. Use --dry-run for local preview.")
+        return 1
+
     missing = []
     if not IG_USER_ID:
         missing.append("IG_USER_ID")
@@ -415,6 +559,7 @@ def main():
             return 1
 
         # 成功 → 冪等ログ更新
+        record_publication_result("instagram", {"caption": caption}, post_id=media_id, confirmed=True)
         uploaded.append(item["name"])
         save_uploaded_log(uploaded)
         remaining = len(available) - 1

@@ -65,6 +65,64 @@ def pick(kind: str, options, rng=random):
     return opts[i], ids[i]
 
 
+def cadence_factor(platform: str) -> float:
+    """この媒体の投稿頻度係数を content_pool.json から読む（チャネル間バンディット）。
+    1.0=現状維持 / 1.25=勝ち媒体で増枠 / 0.5=流入ゼロ30日で半減 / 0.25=60日 / 0=停止中。
+    プールが無い・キーが無い場合は 1.0（従来挙動と同一＝絶対に死なない）。"""
+    try:
+        data = json.loads(POOL_PATH.read_text(encoding="utf-8"))
+        cw = (data.get("channel_weights") or {}).get(platform) or {}
+        v = float(cw.get("cadence_factor", 1.0))
+        return v if 0.0 <= v <= 2.0 else 1.0
+    except Exception:
+        return 1.0
+
+
+def posts_this_run(platform: str, rng=random) -> int:
+    """この実行で何本投稿するかを返す（0/1/2）。cadence_factor を期待値どおりに実現する。
+      1.25 → 1本、25%の確率で2本（＝平均1.25本＝勝ち媒体の増枠）
+      1.0  → 1本（現状維持）
+      0.5  → 50%の確率で1本（＝流入ゼロ30日の半減）
+      0.0  → 0本（停止中媒体）
+    uploader側は `for _ in range(variant_bandit.posts_this_run("tumblr")):` で投稿を回す。
+    プールが無ければ 1 を返す＝従来挙動（絶対に死なない）。"""
+    f = cadence_factor(platform)
+    n = int(f)
+    frac = f - n
+    try:
+        if frac > 0 and rng.random() < frac:
+            n += 1
+    except Exception:
+        return 1
+    if n < 1:
+        # 無言スキップは「タスク緑・投稿ゼロ」に見えて監視が誤検知するため必ず記録する
+        log_post(platform, {"skipped": "cadence", "factor": round(f, 3), "posted": False})
+    return n
+
+
+def should_post_now(platform: str, rng=random) -> bool:
+    """cadence_factor に従って「今回の投稿枠を実行するか」を確率的に決める。
+    uploaderの投稿直前に1行入れるだけで頻度調整が効く:
+        if not variant_bandit.should_post_now("tumblr"): return
+    係数1.0以上は常にTrue（枠を増やすのはスケジュール側の仕事）。0なら常にFalse。"""
+    f = cadence_factor(platform)
+    if f >= 1.0:
+        return True
+    ok = False if f <= 0.0 else _rand_ok(rng, f)
+    if not ok:
+        # 無言でスキップすると「タスク緑・投稿ゼロ」になり監視が誤検知する（既知事象）。
+        # 必ず理由を残す。
+        log_post(platform, {"skipped": "cadence", "factor": round(f, 3), "posted": False})
+    return ok
+
+
+def _rand_ok(rng, f):
+    try:
+        return rng.random() < f
+    except Exception:
+        return True
+
+
 def with_utm_content(url: str, variant_key: str) -> str:
     """URLへ utm_content=<variant_key> を付与（既にある場合は触らない）。"""
     if not url or not variant_key or "utm_content=" in url:

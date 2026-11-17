@@ -56,6 +56,10 @@ def load_pool(lane: str) -> dict:
     out["_generic_trend_candidates"] = data.get("generic_trend_candidates", [])
     out["_version"] = data.get("version", "")
     out["_goal_note"] = data.get("goal_note", "")
+    out["_rules"] = data.get("rules", {})
+    out["_performance"] = data.get("performance", {})
+    out["_platform_focus"] = data.get("platform_focus", {})
+    out["_conversion_focus"] = data.get("conversion_focus", {})
     return out
 
 
@@ -92,4 +96,17 @@ def as_insights(lane: str, platform: str = "") -> dict:
     ng = [str(w).strip() for w in pool.get("ng_words", []) if str(w).strip()]
     if ng:
         ins["avoid_tags"] = ng
+    if platform:
+        focus = (pool.get("_platform_focus") or {}).get(platform) or {}
+        if focus:
+            ins["platform_focus"] = focus
+    conversion_focus = pool.get("_conversion_focus") or {}
+    if conversion_focus:
+        ins["conversion_focus"] = conversion_focus
+    performance = pool.get("_performance") or {}
+    if performance:
+        ins["performance"] = performance
+    rules = pool.get("_rules") or {}
+    if rules:
+        ins["rules"] = rules
     return ins

@@ -6,6 +6,8 @@ __pycache__/
 .env.instagrapi
 session_instagrapi.json
 *_ig.jpg
+dry_run_*.json
+dry_run_*.html
 
 .venv/
 .instagram_profile/

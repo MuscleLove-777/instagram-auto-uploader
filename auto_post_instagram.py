@@ -7,7 +7,7 @@ TikTok版(auto_post_tiktok.py)と同じ設計:
   instagram.com の作成フローを操作してリール投稿。パスワードをスクリプトに渡さない
   （過去のinstagrapi/Graph API路線はログイン/ホスティングで頓挫 → ブラウザ実セッション方式が解）。
 
-★SFWのみ: tiktok-auto-uploader/approved_sfw.json（Claude目視承認済み）を共用。
+★000_Tumblr_movie配下はサブフォルダを含め、置いた時点でユーザー承認済み。
 ★1実行=1投稿。1日上限・最小間隔・再投稿間隔ガード。
 ★captcha/チャレンジ検知で安全中断（Claudeは解かない）。
 
@@ -20,6 +20,8 @@ TikTok版(auto_post_tiktok.py)と同じ設計:
 exit code: 0=成功/正常スキップ, 2=要ログイン, 3=captcha/チャレンジ, 1=失敗
 環境変数: IG_HEADLESS=0 でブラウザ表示。
 """
+from publication_evidence import record_publication_result, identity_from_url
+from promotion_policy import CANONICAL_URL, canonical_cta, strip_plain_promotion, normalize_plain_promotion, normalize_html_promotion
 import os, sys, json, time, random, datetime
 
 try:
@@ -34,7 +36,11 @@ POSTED_LOG = os.path.join(HERE, "posted_instagram.json")
 HOME_URL = "https://www.instagram.com/"
 
 sys.path.insert(0, HERE)
+COLLECTION_ROOT = os.path.dirname(os.path.realpath(HERE))
+if COLLECTION_ROOT not in sys.path:
+    sys.path.insert(0, COLLECTION_ROOT)
 from pool_loader import as_insights  # noqa: E402
+from source_video_pool import folder_approved_entries  # noqa: E402
 
 try:
     from variant_bandit import pick as bandit_pick, log_post
@@ -64,10 +70,8 @@ def _load_dotenv(path=None):
 
 _load_dotenv()
 
-# SFW承認プールはTikTok側と共用（目視選別は1回で全媒体に効かせる）
-APPROVED_LOG = os.path.abspath(os.path.join(
-    HERE, os.environ.get("APPROVED_SFW_PATH",
-                         r"..\tiktok-auto-uploader\approved_sfw.json")))
+MEDIA_DIR = os.path.abspath(os.path.join(
+    os.path.realpath(HERE), os.environ.get("LOCAL_MEDIA_DIR", r"..\000_Tumblr_movie")))
 
 
 def _load_json(path, default):
@@ -94,20 +98,14 @@ def _norm(p):
 
 
 def load_approved_entries():
-    d = _load_json(APPROVED_LOG, {})
-    out = []
-    for x in d.get("approved", []):
-        if isinstance(x, dict) and x.get("path"):
-            out.append({"path": x["path"], "category": x.get("category", "")})
-        elif isinstance(x, str):
-            out.append({"path": x, "category": ""})
-    return out
+    entries, _ = folder_approved_entries(MEDIA_DIR, extensions=(".mp4", ".mov", ".m4v", ".webm"))
+    return entries
 
 
 def pick_video():
     metas = load_approved_entries()
     if not metas:
-        print(f"承認プールが空です（{APPROVED_LOG}）→ 投稿スキップ")
+        print(f"フォルダ動画プールが空です（{MEDIA_DIR}）→ 投稿スキップ")
         return None
     posted = load_posted()
     last_at = {}
@@ -142,7 +140,7 @@ def pick_video():
         chosen = reusable[0]
         print(f"全て投稿済み → 最古を再利用: {os.path.basename(chosen['path'])} (last={chosen.get('last')})")
         return chosen
-    print(f"承認プール{len(metas)}本は全て{min_repost_days}日以内に投稿済み → スキップ")
+    print(f"フォルダ動画プール{len(metas)}本は全て{min_repost_days}日以内に投稿済み → スキップ")
     return None
 
 
@@ -150,12 +148,17 @@ CATEGORY_TAGS = {
     "pullups": ["懸垂", "calisthenics"],
     "training": ["筋トレ", "workout"],
 }
+RELEVANT_TAG_SIGNALS = (
+    "筋", "トレ", "フィット", "ワークアウト", "アスリート", "ボディ", "懸垂", "腕相撲",
+    "muscle", "fitness", "workout", "strong", "athlet", "gym", "bodybuild", "calisthenics",
+)
 
 
 def build_caption(video_path):
     ins = as_insights("safe_fitness", platform="instagram")
     templates = ins.get("recommended_templates") or ["今日も積み上げ💪 {hashtags}"]
-    tags_all = [t for t in (ins.get("recommended_tags") or []) if t and " " not in t]
+    tags_all = [t for t in (ins.get("recommended_tags") or [])
+                if t and " " not in t and any(s in t.lower() for s in RELEVANT_TAG_SIGNALS)]
     ng = [w.lower() for w in (ins.get("avoid_tags") or [])]
 
     tpl, tpl_key = bandit_pick("instagram_caption", templates)
@@ -173,7 +176,7 @@ def build_caption(video_path):
     low = caption.lower()
     if any(n in low for n in ng):
         caption = "今日も積み上げ💪 " + hashtags
-    return caption[:2000], tpl_key
+    return normalize_plain_promotion(caption, max_length=2000), tpl_key
 
 
 # ============================================================
@@ -398,6 +401,7 @@ def _post(video_path, category=""):
         try:
             page = ctx.pages[0] if ctx.pages else ctx.new_page()
             status = post_video(page, video_path, caption)
+            published_url = page.url if status == "OK" else None
         finally:
             ctx.close()
 
@@ -408,6 +412,8 @@ def _post(video_path, category=""):
             "abspath": video_path,
             "category": category,
             "caption": caption,
+            "publication_receipt": record_publication_result("instagram", {"caption": caption}, source_locator=published_url,
+                                                              confirmed=True, variants={"instagram.caption": tpl_key}, receipt_status="ui_confirmed"),
             "uploaded_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         })
         save_posted(log)
@@ -508,7 +514,22 @@ def run_login():
     return 0 if ok else 1
 
 
+def _cadence_slots():
+    """自動運営機構(channel_weights)が決めた今回の投稿本数。
+    勝ち媒体は平均1.25本/実行へ増枠、流入ゼロ継続は半減、停止中は0本。
+    プールが無ければ1本＝従来挙動（絶対に死なない）。"""
+    try:
+        import variant_bandit
+        return variant_bandit.posts_this_run("instagram")
+    except Exception:
+        return 1
+
+
 def main():
+    _slots = _cadence_slots()
+    if _slots < 1:
+        print("[cadence] 自動頻度調整により今回はスキップします")
+        return 0
     args = sys.argv[1:]
     if args and args[0] == "login":
         sys.exit(run_login())
