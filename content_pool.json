@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-21 08:01:08 +0900",
-  "version": "20261121",
+  "generated_at": "2026-11-22 08:01:08 +0900",
+  "version": "20261122",
   "rules": {
     "generic_trend_max": 1,
     "hashlike_ban": true,
@@ -55,8 +55,7 @@
         "AIアート"
       ],
       "trend_tags": [
-        "AI",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [
         "uncensored",
@@ -261,8 +260,7 @@
         "AIイラスト"
       ],
       "trend_tags": [
-        "AI",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [
         "porn",
@@ -307,8 +305,7 @@
         "AI美女"
       ],
       "trend_tags": [
-        "AI",
-        "生成AI"
+        "AI"
       ],
       "ng_words": [],
       "caption_templates": [
